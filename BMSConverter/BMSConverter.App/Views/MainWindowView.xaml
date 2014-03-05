@@ -1,0 +1,34 @@
+﻿<Window x:Class="BMSConverter.App.Views.MainWindowView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ViewModels1="clr-namespace:BMSConverter.App.ViewModels"
+        xmlns:ViewModels2="clr-namespace:BMSConverter.WPF.ViewModels;assembly=BMSConverter.WPF"
+        xmlns:Views="clr-namespace:BMSConverter.WPF.Views;assembly=BMSConverter.WPF"
+        Title="MainWindowView" Width="{Binding Path=WindowWidth, Mode=TwoWay}"
+        Height="{Binding Path=WindowHeight, Mode=TwoWay}" Closing="Window_Closing">
+    <Window.DataContext>
+        <ViewModels1:MainWindowViewModel />
+    </Window.DataContext>
+    <Window.Resources>
+        <ResourceDictionary>
+            <DataTemplate DataType="{x:Type ViewModels2:BmsMenuBarViewModel}">
+                <Views:BmsMenuBarView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type ViewModels2:BmsExportViewModel}">
+                <Views:BmsExportView/>
+            </DataTemplate>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="131*"/>
+            <ColumnDefinition Width="161*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <ContentControl Grid.Row="0" Content="{Binding Path=BmsMenuBarVm, Mode=OneWay}" Grid.ColumnSpan="2" />
+        <ContentControl Grid.Row="1" Content="{Binding Path=BmsExportVm, Mode=OneWay}" Grid.ColumnSpan="2" />
+    </Grid>
+</Window>
